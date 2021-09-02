@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CogBtn({label, actionHandler, type, disabled}) {
+function CogBtn({label, onClick, type, disabled}) {
     const buttonTypes = {
         'submit': true,
         'reset': true,
@@ -13,8 +13,7 @@ function CogBtn({label, actionHandler, type, disabled}) {
     let markup = <span>unsupported button type</span>
     
     if (buttonTypes[type]) {
-
-        markup = (<button onClick={actionHandler} type={type} disabled={disabled}>{label}</button>);
+        markup = (<button onClick={() => {onClick()}} type={type} disabled={disabled}>{label}</button>);
     }
 
     return markup;

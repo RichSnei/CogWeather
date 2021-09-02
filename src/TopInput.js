@@ -1,40 +1,42 @@
 import React from 'react';
-import CogBtn from './CogBtn'
+import { connect } from "react-redux";
+import allActions from './actions/index';
 
+import CogBtn from './shared/CogBtn'
 class TopInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            city: ""
-        }
-        this.submitCity = this.submitCity.bind(this);
-        this.updateCityName = this.updateCityName.bind(this);
-    }
-
-    submitCity() {
-        const city = this.state.city.trimEnd()
-        if (city.length > 0) {
-            alert(`got a city '${city}'`)
-        }
-    }
-
-    updateCityName(e) {
-        this.setState({city: e.target.value})
-    }
-
     render() {
-        const enableSubmit = this.state.city.trim().length === 0;
+        const cityState = this.props.weatherData.cityState;
+        const enableSubmit = cityState.trim().length === 0;
+        const dispatch = this.props.dispatch;
         return (
-            <form id="header" onSubmit={this.submitCity}>
+            <>
+            <h2>Cognizant Weather App</h2>
+            <form id="header" onSubmit={(e) => {e.preventDefault(); console.log('test')}}>
                 <div>
                     <label>Enter City: &nbsp;
-                        <input type="text" value={this.state.city} onChange={this.updateCityName}></input>
-                    </label>
+                        <input type="text" value={cityState} onChange={(e) => { (dispatch)(allActions.weatherActions.setCityState(e.target.value))}}></input>
+                    </label>&nbsp;
+                    <CogBtn label="Submit" disabled={enableSubmit} 
+                            onClick={() => {  (dispatch)(allActions.weatherActions.submitCityState())} } />
                 </div>
-                <div><CogBtn clickHandler={this.submitCity} type="submit" label="Submit" disabled={enableSubmit} /></div>
             </form>
+            </>
         )
-    }
+}
 }
 
-export default TopInput 
+function mapStateToProps(state) {
+    const weatherData = state.weatherData;
+    return {
+        weatherData,
+    };
+  }
+
+//   function mapDispatchToProps() {
+//       return {
+//           allActions,
+//       }
+//   }
+
+export default connect(mapStateToProps)(TopInput);
+// export default TopInput 

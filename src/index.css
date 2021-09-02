@@ -1,12 +1,13 @@
 body {
   padding: 20px;
   font-family: Helvetica;
+  max-width: 800px;
 }
 
 #app {
   background: #fff;
   border-radius: 4px;
-  padding: 20px;
+  padding: 2em;
   transition: all 0.2s;
 }
 
@@ -29,10 +30,35 @@ input {
 }
 
 #header {
-  margin: 1.5em;
   text-align: left;
 }
 
 #header > div {
-  margin-top: 20px;
+  margin-bottom: 1.5em;
 }
+
+.weather-widget {
+  width: 80%;
+  background: rgb(0, 140, 255);
+  color: white;
+  padding: 2em;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  border-radius: 4px;
+  border: solid 1px green;
+}
+
+.overview {
+  align-self: center;
+}
+
+.overview >div:nth-child(1) {
+  font-weight: bold;
+  font-size: 2em;
+  padding-bottom: 10px;
+}
+
+.forecast >div:nth-child(2) {
+  font-size: 4em;
+}
+
