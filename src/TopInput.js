@@ -22,7 +22,7 @@ class TopInput extends React.Component {
             </form>
             </>
         )
-}
+    }
 }
 
 function mapStateToProps(state) {
