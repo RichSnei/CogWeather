@@ -1,5 +1,7 @@
 import './App.css';
 import React from 'react';
+import { connect } from "react-redux";
+
 import TopInput from './TopInput'
 import WeatherWidget from './shared/WeatherWidget';
 /*
@@ -16,15 +18,33 @@ import WeatherWidget from './shared/WeatherWidget';
 */
 
 class App extends React.Component {
-
 	render() {
+		const { isError, errorStr, haveData } = this.props.weatherData;
+		let weatherMarkup = <div></div>;
+		
+		if (!haveData || isError) {
+			if (isError) {
+				weatherMarkup = <div>{errorStr}</div>
+			}
+		} else {
+			const { city, state, forecast } = this.props.weatherData;
+			weatherMarkup = <WeatherWidget city={city} state={state} forecast={forecast} />
+		}
+		
 		return (
 			<div className="App">
 				<TopInput />
-				<WeatherWidget />
+				{weatherMarkup}
 			</div>
 		);
 	}
 }
 
-export default App;
+function mapStateToProps(state) {
+    const weatherData = state.weatherData;
+    return {
+        weatherData,
+    };
+  }
+
+export default connect(mapStateToProps)(App);

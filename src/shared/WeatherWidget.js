@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from "react-redux";
 
 class WeatherWidget  extends React.Component {
     render() {
-        const { city, state, forecast, haveData } = this.props.weatherData;
-        const markup = (haveData) ? (
+        const {city, state, forecast} = this.props;
+        const markup = (
             <div className="weather-widget">
                 <div className="overview">
                     <div>{city}, {state}</div>
@@ -16,17 +15,9 @@ class WeatherWidget  extends React.Component {
                     <div>feels like {forecast.feels}&deg;</div>
                 </div>
             </div>
-        ) : <div></div>;
-
+        )
         return markup;
     }
 }
 
-function mapStateToProps(state) {
-    const weatherData = state.weatherData;
-    return {
-        weatherData,
-    };
-  }
-
-export default connect(mapStateToProps)(WeatherWidget);
+export default WeatherWidget;

@@ -11,10 +11,11 @@ class TopInput extends React.Component {
         return (
             <>
             <h2>Cognizant Weather App</h2>
-            <form id="header" onSubmit={(e) => {e.preventDefault(); console.log('test')}}>
+            <form id="header" onSubmit={(e) => {e.preventDefault();}}>
                 <div>
                     <label>Enter City: &nbsp;
-                        <input type="text" value={cityState} onChange={(e) => { (dispatch)(allActions.weatherActions.setCityState(e.target.value))}}></input>
+                        <input type="text" value={cityState} placeholder='example: San Jose, CA' 
+                        onChange={(e) => { (dispatch)(allActions.weatherActions.setCityState(e.target.value))}}></input>
                     </label>&nbsp;
                     <CogBtn label="Submit" disabled={enableSubmit} 
                             onClick={() => {  (dispatch)(allActions.weatherActions.submitCityState())} } />

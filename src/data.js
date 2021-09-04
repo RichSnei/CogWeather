@@ -222,4 +222,23 @@ const data = {
 	}
 }
 
+const fixupData = () => {
+	const keys = Object.keys(data.States);
+
+	for (let i=0, len=keys.length; i < len; i++) {
+		const stateName = keys[i];
+		const currentState = data.States[stateName];
+		const citiesObj = {};
+	
+		for (let j=0, clen=currentState.cities.length; j < clen; j++) {
+			const city = currentState.cities[j]
+			citiesObj[city.name.trim().toLowerCase()] = city.forecast;  
+		}
+		currentState.citiesObj = citiesObj;
+	}
+	return data;
+}
+
+fixupData();
+
 export default data;
